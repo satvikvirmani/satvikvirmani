@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { jetBrains_mono } from "@/app/utils/fonts";
 
 export const metadata: Metadata = {
   title: "Satvik Virmani",
@@ -13,7 +14,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className="w-full bg-red-200" style={jetBrains_mono.style}>
+        {children}
+      </body>
     </html>
   );
 }
