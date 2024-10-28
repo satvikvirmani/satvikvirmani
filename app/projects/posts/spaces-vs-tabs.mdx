@@ -1,32 +1,47 @@
 ---
-title: 'Spaces vs. Tabs: The Indentation Debate Continues'
-publishedAt: '2024-04-08'
-summary: 'Explore the enduring debate between using spaces and tabs for code indentation, and why this choice matters more than you might think.'
-image: '/assets/gg.png'
+title: 'playmedia'
+publishedAt: '2022-09-26'
+summary: 'A python module to play and control media files.'
+image: '/assets/projects/playmedia/playmedia.png'
 ---
 
-The debate between using spaces and tabs for indentation in coding may seem trivial to the uninitiated, but it is a topic that continues to inspire passionate discussions among developers. This seemingly minor choice can affect code readability, maintenance, and even team dynamics.
+![image](/assets/projects/playmedia/playmedia.png)
 
-Let's delve into the arguments for both sides and consider why this debate remains relevant in the software development world.
+Creating the playmedia project was an exciting journey that combined my love for coding and music. As someone who enjoys listening to music while working, I wanted to create a Python module that could handle media files seamlessly. The idea was to give users the ability to play, control, and manage their media files directly from their Python scripts.
 
-## The Case for Spaces
+### Installation and Dependencies
+To make the module accessible, I ensured that it could be easily installed using `pip`:
 
-Advocates for using spaces argue that it ensures consistent code appearance across different editors, tools, and platforms. Because a space is a universally recognized character with a consistent width, code indented with spaces will look the same no matter where it's viewed. This consistency is crucial for maintaining readability and avoiding formatting issues when code is shared between team members or published online.
+```bash
+pip install playmedia
+```
 
-Additionally, some programming languages and style guides explicitly recommend spaces for indentation, suggesting a certain number of spaces (often two or four) per indentation level. Adhering to these recommendations can be essential for projects that aim for best practices in code quality and readability.
+The module relies on VLC Media Player, which is a robust media player that supports various file formats. This dependency allowed me to focus on the module’s functionality without worrying about the underlying media processing.
 
-## The Case for Tabs
+### Usage
+The core of the *playmedia* module revolves around two classes: File and Files.
 
-On the other side of the debate, proponents of tabs highlight the flexibility that tabs offer. Because the width of a tab can be adjusted in most text editors, individual developers can choose how much indentation they prefer to see, making the code more accessible and comfortable to read on a personal level. This adaptability can be particularly beneficial in teams with diverse preferences regarding code layout.
+- File Class: This class is designed for handling individual media files. You can initiate it by passing the path to the media file, and then use various methods to control playback. Whether you want to start, pause, or stop a file, adjust the volume, or even modify its metadata, the File class has you covered.
 
-Tabs also have the advantage of semantic meaning. A tab is explicitly meant to represent indentation, whereas a space is used for many purposes within code. This distinction can make automated parsing and manipulation of code simpler, as tools can more easily recognize and adjust indentation levels without confusing them with spaces used for alignment.
+- Files Class: For those who work with multiple media files, the Files class is perfect. You can initiate it with either a directory path or a list of file paths. This class lets you manage playlists, play files in order, or jump to a specific file by its index. It also provides methods for skipping tracks, adjusting volume, and retrieving metadata for the currently playing file.
 
-## Hybrid Approaches and Team Dynamics
+I focused on making the API intuitive, with methods like start(), pause(status), set_volume(vol), and meta(tag), among others. These methods return informative strings, which can be printed or used further in your scripts.
 
-The debate often extends into discussions about hybrid approaches, where teams might use tabs for indentation and spaces for alignment within lines, attempting to combine the best of both worlds. However, such strategies require clear team agreements and disciplined adherence to coding standards to prevent formatting chaos.
+### Supported formats
 
-Ultimately, the choice between spaces and tabs often comes down to team consensus and project guidelines. In environments where collaboration and code sharing are common, agreeing on a standard that everyone follows is more important than the individual preferences of spaces versus tabs. Modern development tools and linters can help enforce these standards, making the choice less about technical limitations and more about team dynamics and coding philosophy.
+*playmedia* supports a wide range of media formats, including:
 
-## Conclusion
+- .m4a
+- .flac
+- .mp3
+- .mp4
+- .wav
+- .wma
+- .aac
+- .mkv
 
-While the spaces vs. tabs debate might not have a one-size-fits-all answer, it underscores the importance of consistency, readability, and team collaboration in software development. Whether a team chooses spaces, tabs, or a hybrid approach, the key is to make a conscious choice that serves the project's needs and to adhere to it throughout the codebase. As with many aspects of coding, communication and agreement among team members are paramount to navigating this classic programming debate.
+This broad support ensures that users can work with nearly any media file they have.
+
+# Links
+- [Github](https://github.com/satvikvirmani)
+- [PyPI](https://pypi.org/project/playmedia/)
