@@ -1,0 +1,184 @@
+---
+title: 'Infinity Theme - A VS Code Color Theme That Doesn't Hurt Your Eyes'
+publishedAt: '2022-09-15'
+summary: 'A dark color theme for VS Code that combines aesthetics with functionality, inspired by the Halcyon color scheme and built with developers in mind.'
+image: '/assets/projects/infinity-theme/infinity-theme.jpg'
+---
+
+![Infinity Theme](/assets/projects/infinity-theme/infinity-theme.jpg)
+
+Creating the Infinity theme was an exciting journey that combined my passion for clean design and my daily experience as a developer. Like many of you, I spend hours staring at code every day, and I noticed something: the default themes were either too harsh on the eyes or made it difficult to distinguish different elements of code quickly. I wanted to create something that would make those long coding sessions more enjoyable while actually helping me code better.
+
+## The Story Behind Infinity
+
+The name "Infinity" represents the endless possibilities of coding and the continuous loop of improvement that every developer goes through. The infinity symbol in the logo isn't just aesthetic—it represents the cyclical nature of development: write, test, debug, improve, repeat.
+
+I was heavily inspired by the Halcyon theme but wanted to take it further. I spent weeks tweaking colors, testing different combinations, and literally living with various iterations of the theme. My goal was simple: create a theme that looks beautiful, reduces eye strain, and makes code more readable at a glance.
+
+## What Makes Infinity Different?
+
+### Colors That Actually Make Sense
+
+One thing that always bothered me about some themes is random color choices. Why is this keyword blue and that one green? In Infinity, every color has a purpose:
+
+**Purple (`#C792EA`)** is for keywords and control structures—they're important, so they stand out. When you're scanning code, you can immediately spot your `if`, `for`, and `function` keywords.
+
+**Green (`#B4F668`)** is for strings because strings are data—they're the content of your application. That bright, fresh green makes them pop without being overwhelming.
+
+**Cyan (`#1BC4DB`)** is for functions because functions are actions—they do things. The cool blue tone helps you identify where actions happen in your code.
+
+**Orange (`#F78C6C`)** is for numbers and constants—these are solid, unchanging values, and the warm orange gives them that grounded feeling.
+
+**Yellow (`#ffcc66`)** is the accent color for important UI elements. It's warm and inviting but not distracting.
+
+### The Background Story
+
+The main background color (`#1d2433`) was probably the hardest to get right. Too dark, and you strain to see. Too light, and it defeats the purpose of a dark theme. I tested this color at different times of day, in different lighting conditions, and on different monitors. It's dark enough to reduce glare but not so dark that you lose contrast with the code.
+
+The sidebar is slightly darker (`#171c28`) to create a subtle visual separation. Your eyes naturally focus on the editor where the code is, but the sidebar doesn't disappear into nothingness either.
+
+## Features You'll Actually Use
+
+### Smart Syntax Highlighting
+
+I didn't just randomly assign colors to different code elements. There's a method to this madness:
+
+**Comments** are gray and italicized because they're supplementary information. They shouldn't compete with your actual code for attention, but they're still readable when you need them.
+
+**Variables** use a clean white-ish color (`#EEFFFF`) because they're everywhere in your code, and they shouldn't be distracting. They're the neutral elements that everything else builds on.
+
+**Functions and methods** are cyan with italic styling. That italic touch makes them feel dynamic, which matches what they do—they're active, they move, they execute.
+
+### Git Integration That Actually Helps
+
+Version control colors in many themes are an afterthought. In Infinity, git status colors are designed to give you instant feedback:
+
+- **Modified files** are cyan—they've changed, but it's an ongoing process
+- **New files** are green—fresh, untracked, ready to be added
+- **Deleted files** are red—because something's gone
+
+When you're working with git, these colors give you instant visual feedback without having to read the status labels.
+
+### Markdown That Looks Like Writing
+
+I write a lot of documentation (clearly), and I wanted Markdown to feel less like code and more like actual writing. Headings are green and stand out. Links are cyan and underlined. Bold text is actually bold and colored differently. It makes writing READMEs and documentation actually pleasant.
+
+### The Terminal That Doesn't Blind You
+
+Terminal colors are often overlooked in themes, but if you're like me, you spend a significant amount of time in the integrated terminal. I used the same color philosophy here—cyan for info, green for success, orange for warnings, red for errors. The ANSI colors are calibrated to work together harmoniously.
+
+## Advanced Features for Power Users
+
+### Multi-Level JSON Coloring
+
+If you work with JSON a lot (and who doesn't these days?), you'll love this feature. Infinity supports up to 8 levels of nested JSON keys, each with its own color. This might sound like overkill, but when you're debugging a complex API response, being able to visually track nesting levels is a game-changer.
+
+Level 1 is purple, level 2 is yellow, level 3 is orange, and so on. Your brain learns to recognize the depth of nesting by color, which makes navigating complex JSON structures much faster.
+
+### Intelligent Bracket Matching
+
+The bracket matching uses a golden yellow (`#ffcc66`) with a subtle background highlight. When you click next to a bracket, you can immediately see its partner. I've lost count of how many times this has saved me from debugging missing brackets.
+
+### Diff View That Makes Sense
+
+The diff editor uses semi-transparent overlays that let you see both the content and the change indicator. Added lines have a subtle green background, removed lines have a subtle red background, and modified content is highlighted in a way that shows you exactly what changed without overwhelming the view.
+
+### Peek Definition That Actually Works
+
+The peek definition window (you know, when you Alt+Click on a function) has its own carefully designed color scheme. The title bar is slightly different from the main background, the matched text is highlighted in yellow, and the result list has hover states that feel responsive.
+
+## How to Get the Most Out of It
+
+### The Font Matters
+
+I can't stress this enough—pair Infinity with Victor Mono font. It has programming ligatures (those fancy combined symbols like `=>` becoming an arrow) and a semi-connected cursive italic style that looks amazing with Infinity's italic syntax elements. Trust me on this one.
+
+### Extensions That Complement Infinity
+
+I designed Infinity with Material Icon Theme in mind. The icon colors are specifically chosen to match Infinity's color palette. I recommend setting the folder color to `#8695b7` (the same as Infinity's foreground color) for a cohesive look.
+
+Bracket Pair Color DLW is another must-have. It uses rainbow colors for nested brackets, and I've tested it extensively with Infinity to make sure the colors work together instead of clashing.
+
+Color Highlight is perfect if you work with CSS or any color codes. It'll show you a preview of the color inline, and it looks great with Infinity's color scheme.
+
+### Settings That Make a Difference
+
+I recommend these settings for the optimal experience:
+
+```json
+{
+  "editor.fontFamily": "'Victor Mono', 'Droid Sans Mono', 'monospace'",
+  "editor.fontWeight": "bold",
+  "editor.letterSpacing": 0.8,
+  "editor.lineHeight": 1.6,
+  "editor.fontLigatures": true,
+  "workbench.iconTheme": "material-icon-theme",
+  "material-icon-theme.folders.color": "#8695b7",
+  "material-icon-theme.folders.theme": "specific",
+  "material-icon-theme.hidesExplorerArrows": true,
+  "terminal.integrated.fontFamily": "Victor Mono",
+  "terminal.integrated.fontWeight": "bold",
+  "terminal.integrated.letterSpacing": 2
+}
+```
+
+The bold font weight and increased letter spacing improve readability significantly. The line height of 1.6 gives your code room to breathe without wasting vertical space.
+
+## The Technical Side (Without Getting Too Technical)
+
+### Complete UI Theming
+
+Infinity themes literally everything in VS Code. Every panel, every button, every input field has been thoughtfully colored. The activity bar, sidebar, editor groups, tabs, panels, status bar, title bar—everything is themed consistently.
+
+The color choices create a visual hierarchy. Important elements pop, secondary elements recede, and your code is always the star of the show.
+
+### Performance
+
+A theme shouldn't slow down your editor. Infinity is just a JSON file with color definitions—it has zero impact on VS Code's performance. No scripts, no calculations, just pure, efficient theming.
+
+### Accessibility
+
+While Infinity is a dark theme (and dark themes aren't for everyone), I've ensured that contrast ratios meet accessibility standards where possible. Text on backgrounds has sufficient contrast, active elements are clearly distinguishable from inactive ones, and color isn't the only indicator of state (we use opacity, borders, and other visual cues too).
+
+## Languages and Frameworks
+
+Infinity has been tested with and optimized for:
+
+- **JavaScript/TypeScript** - Clear distinction between ES6+ syntax
+- **Python** - Strings aren't italicized (because that would be weird for Python)
+- **HTML/CSS** - Tag names, attributes, and values all have their own colors
+- **React/JSX** - Components, props, and JSX syntax are clearly differentiated
+- **Markdown** - Headings, links, code blocks all look beautiful
+- **JSON** - Multi-level nesting support
+- **Git** - Diff views, merge conflicts, all themed
+
+## What I Learned Building This
+
+Building a color theme taught me a lot about color theory, accessibility, and how much tiny details matter. I learned that what looks good on my monitor might not look good on yours, which is why I tested on multiple displays and in different lighting conditions.
+
+I learned that consistency is more important than having every element be a different color. Sometimes restraint is better than showing off the entire color palette.
+
+Most importantly, I learned that a good theme should be invisible. You shouldn't notice the theme; you should just enjoy coding more.
+
+## The Future of Infinity
+
+I'm constantly tweaking and improving Infinity based on feedback. Some things I'm working on:
+
+- Light theme variant (controversial, I know, but some people want it)
+- Better support for more languages
+- Color customization options for people who want to tweak specific elements
+- Integration with popular framework-specific extensions
+
+## Try It Out
+
+The best way to see if Infinity works for you is to actually use it. Install it from the VS Code marketplace, set up the recommended configuration, and give it a genuine try for a day or two. Your eyes might thank you.
+
+If you have feedback, suggestions, or issues, hit me up on GitHub. I'm always looking to improve Infinity and make it work better for more people.
+
+## Final Thoughts
+
+Infinity isn't just a color theme—it's the result of countless hours of development, testing, and refinement. It's the theme I use every single day for my own work, which means it's constantly being battle-tested and improved.
+
+Whether you're writing JavaScript at 2 AM, debugging Python during your lunch break, or documenting your code in Markdown, Infinity is designed to make that experience better. It's not about being flashy or showing off complex features; it's about creating an environment where you can focus on what matters—writing great code.
+
+Give it a try, and happy coding! ∞
