@@ -1,47 +1,147 @@
 ---
-title: 'playmedia'
-publishedAt: '2022-09-26'
-summary: 'A python module to play and control media files.'
-image: '/assets/projects/playmedia/playmedia.png'
+title: 'playmedia - Python Media Player Module'
+publishedAt: '2023'
+summary: 'A powerful Python module that brings VLC media player capabilities to your code. Play, control, and manage audio/video files with a clean, Pythonic API.'
+image: '/assets/projects/playmedia/playmedia.jpg'
 ---
 
-![image](/assets/projects/playmedia/playmedia.png)
+![playmedia](/assets/projects/playmedia/playmedia.jpg)
+
+## The Story Behind playmedia
 
 Creating the playmedia project was an exciting journey that combined my love for coding and music. As someone who enjoys listening to music while working, I wanted to create a Python module that could handle media files seamlessly. The idea was to give users the ability to play, control, and manage their media files directly from their Python scripts.
 
-### Installation and Dependencies
-To make the module accessible, I ensured that it could be easily installed using `pip`:
+I found myself constantly switching between my code editor and media player, and I thought - why not bring these two worlds together? That's when playmedia was born. The goal was simple: make media playback in Python as straightforward as possible, without sacrificing power or flexibility.
+
+## What is playmedia?
+
+playmedia is a Python module that lets you play and control media files right from your Python code. Think of it as your personal DJ that speaks Python! Whether you want to play a single song, manage an entire playlist, or build a full-fledged media player, playmedia has got you covered.
+
+The best part? It's built on top of VLC media player, which means you get all that robust media handling power wrapped in a simple, easy-to-use Python interface.
+
+## Core Features
+
+### Single File Playback
+
+The `File` class is your go-to when you want to play individual media files. It's perfect for those times when you just want to play one specific song or video without any fuss.
+
+```python
+from playmedia import File
+
+player = File("my_favorite_song.mp3")
+player.start()
+```
+
+That's it! Your song is now playing. But of course, there's so much more you can do. Want to adjust the volume? Pause for a moment? Check out the song's metadata? It's all just a method call away.
+
+The File class gives you complete control over your media. You can pause and resume, adjust volume from 0 to 100, mute and unmute, and even edit metadata tags like artist, album, and genre. Everything returns helpful messages so you always know what's happening.
+
+### Playlist Management
+
+Now, if you're like me and can't just listen to one song, the `Files` class is where things get really interesting. This is your playlist manager, and it's incredibly flexible.
+
+You can create a playlist in two ways: point it to a directory full of music files, and it'll automatically find and load all supported media files, or give it a specific list of files you want to play. Both work perfectly.
+
+```python
+from playmedia import Files
+
+# Option 1: Load from a directory
+playlist = Files("~/Music/Favorites")
+
+# Option 2: Specific files
+playlist = Files([
+    "song1.mp3",
+    "song2.flac",
+    "song3.mp3"
+])
+```
+
+Once you have your playlist set up, you can navigate through it just like you would with any media player. Skip to the next track, go back to the previous one, or jump directly to a specific song by its index. The playlist remembers where you are and handles everything smoothly.
+
+### Playback Controls
+
+Both classes give you the same intuitive playback controls. The API is designed to be as natural as possible - if you want to pause, you call `pause(True)`. Want to resume? Call `pause(False)`. It's that simple.
+
+Volume control is straightforward too. Set it anywhere from 0 to 100, and you'll get instant feedback confirming the change. Need complete silence? The mute function is just one call away, and you can toggle it on and off without losing your volume setting.
+
+### Metadata Magic
+
+Here's where playmedia really shines - metadata support. You can read 26 different metadata tags from your media files. Want to know the artist, album, genre, or release date? Just ask for it.
+
+But it gets better - you can also edit these tags! Found a song with incorrect artist information? Fix it right from your Python script. The changes are saved directly to the file, so your corrections persist.
+
+```python
+# Read metadata
+artist = player.meta("Artist")
+album = player.meta("Album")
+
+# Edit metadata
+player.edit_meta("Album", "My Custom Playlist")
+player.edit_meta("Artist", "Correct Artist Name")
+```
+
+The supported tags cover everything you'd expect: basic info like Title, Artist, and Album; detailed info like AlbumArtist, TrackNumber, and DiscNumber; media-specific info like Director, Season, and Episode for videos; technical details like EncodedBy and Copyright; and even artwork URLs and ratings.
+
+## How It Actually Works
+
+Under the hood, playmedia uses python-vlc, which are Python bindings for the powerful VLC media player. This means you get all the reliability and format support of VLC, but with a much simpler Python interface.
+
+When you create a File or Files object, playmedia sets up the VLC player components, validates your media files, and configures everything with sensible defaults. Volume is set to 100%, nothing is muted, and playback is ready to go whenever you call `start()`.
+
+The Files class is particularly clever - it builds an indexed dictionary of your media files, making it easy to navigate through your playlist. When you call `next()` or `previous()`, it handles the playlist traversal automatically.
+
+One thing I made sure to implement was proper error handling. If you try to load a file that doesn't exist, you'll get a clear `FileNotFoundError`. Try to pass the wrong type to a method? You'll get a helpful `TypeError` explaining what went wrong. The goal was to make debugging as painless as possible.
+
+## Format Support
+
+playmedia supports all the major formats you'd expect. On the audio side, you've got MP3, FLAC, M4A, WAV, WMA, and AAC covered. For video, it handles MP4 and MKV files. That covers pretty much everything you'd encounter in a typical media library.
+
+The format checking happens automatically when you initialize your player. If you try to load an unsupported format, playmedia will let you know immediately rather than failing mysteriously later on.
+
+## Real-World Usage
+
+I designed playmedia to be useful in a variety of scenarios. Obviously, you can build media player applications with it - that's the most straightforward use case. But it's also great for automation. Want to play specific music at certain times of day? Write a script with playmedia.
+
+I've seen people use it for background music in their applications, as part of audio processing pipelines where they need playback capabilities, and even in educational tools where students need to interact with media files programmatically.
+
+The playlist functionality makes it perfect for managing media libraries. You can build tools to organize, categorize, and play your media collection, all with Python.
+
+## The Little Details
+
+There are some thoughtful touches throughout playmedia that make it nicer to use. For instance, all the control methods return descriptive strings that you can print directly. When you start playback, you get "Now playing Song Title". When you pause, you get "Paused". These little confirmations make your code more user-friendly.
+
+After you call `stop()`, the player automatically reinitializes itself. This might seem like an odd detail, but it prevents a weird VLC quirk where the volume would boost unexpectedly after stopping and restarting playback. It's these kinds of details that make the difference between a library that works and one that's actually pleasant to use.
+
+The error messages are enhanced by the pretty-errors library, making them easier to read and debug in the terminal. Because let's face it - we all make mistakes, and good error messages are invaluable.
+
+## Design Philosophy
+
+When building playmedia, I wanted to follow a few key principles. First, simplicity - the API should be intuitive enough that you can use it without constantly checking documentation. Second, power - simple doesn't mean limited. You should be able to do complex things when you need to. Third, feedback - the library should always tell you what's happening through clear return values and error messages.
+
+I also wanted to make sure it played nicely with the Python ecosystem. That's why it uses type hints (even though it supports Python 3.0+), follows common Python conventions, and integrates well with other tools and libraries.
+
+## Getting Started
+
+Installation is as simple as it gets:
 
 ```bash
 pip install playmedia
 ```
 
-The module relies on VLC Media Player, which is a robust media player that supports various file formats. This dependency allowed me to focus on the module’s functionality without worrying about the underlying media processing.
+Just make sure you have VLC Media Player installed on your system first. That's the only external dependency you need to worry about. Everything else - python-vlc, pretty-errors, colorama - gets installed automatically.
 
-### Usage
-The core of the *playmedia* module revolves around two classes: File and Files.
+Once it's installed, import the class you need and start playing. The learning curve is minimal because the API is designed to be self-explanatory.
 
-- File Class: This class is designed for handling individual media files. You can initiate it by passing the path to the media file, and then use various methods to control playback. Whether you want to start, pause, or stop a file, adjust the volume, or even modify its metadata, the File class has you covered.
+## What's Next?
 
-- Files Class: For those who work with multiple media files, the Files class is perfect. You can initiate it with either a directory path or a list of file paths. This class lets you manage playlists, play files in order, or jump to a specific file by its index. It also provides methods for skipping tracks, adjusting volume, and retrieving metadata for the currently playing file.
+playmedia is feature-complete for what it was designed to do, but there's always room for improvement. If you find bugs or have feature requests, the GitHub issues page is the place to go. And if you want to contribute? Even better! The codebase is well-documented and straightforward to work with.
 
-I focused on making the API intuitive, with methods like start(), pause(status), set_volume(vol), and meta(tag), among others. These methods return informative strings, which can be printed or used further in your scripts.
+The project is MIT licensed, which means you can use it in your projects freely, whether they're personal, commercial, or anything in between.
 
-### Supported formats
+## Final Thoughts
 
-*playmedia* supports a wide range of media formats, including:
+Building playmedia taught me a lot about API design, error handling, and what makes a library truly user-friendly. It's one thing to make something that works; it's another to make something that's actually enjoyable to use.
 
-- .m4a
-- .flac
-- .mp3
-- .mp4
-- .wav
-- .wma
-- .aac
-- .mkv
+Whether you're building a music player, automating media playback, or just want an easy way to play media files from Python, I hope playmedia makes your life a little easier. And if you find it useful, a star on GitHub would be much appreciated!
 
-This broad support ensures that users can work with nearly any media file they have.
-
-# Links
-- [Github](https://github.com/satvikvirmani)
-- [PyPI](https://pypi.org/project/playmedia/)
+Happy coding, and enjoy your music! 🎵

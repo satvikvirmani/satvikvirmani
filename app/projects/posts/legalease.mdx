@@ -1,0 +1,156 @@
+---
+title: 'LegalEase - AI-Powered Legal Services Marketplace'
+publishedAt: '2025-01-26'
+summary: 'A modern platform connecting clients with legal professionals through intelligent semantic search and real-time communication'
+image: '/assets/projects/legalease/legalease.jpg'
+---
+
+![LegalEase Platform](/assets/projects/legalease/legalease.jpg)
+
+## The Story Behind LegalEase
+
+You know that feeling when you need legal help but have no idea where to start? Yeah, I've been there. A couple of years ago, I found myself searching through endless directories of lawyers, reading reviews that didn't quite answer my questions, and basically feeling lost in a sea of legal jargon. I thought to myself - there has to be a better way.
+
+That frustration became the seed for LegalEase. I wanted to create something that would make finding the right legal professional as easy as... well, as easy as asking a question. Not keyword matching, not browsing through categories, but actually understanding what you need and connecting you with someone who can help.
+
+## What Makes LegalEase Different?
+
+### The Magic of AI Matching 🤖
+
+Here's where things get interesting. Instead of forcing you to pick from predefined categories or hope your keywords match something, LegalEase lets you just... explain your situation. In plain English (or whatever language you're comfortable with).
+
+Behind the scenes, I'm using something called vector embeddings - think of it as teaching the computer to understand the *meaning* behind your words, not just the words themselves. So when you type "I'm having issues with my landlord not fixing the heating," the system understands you need a tenant rights specialist, even if you didn't use those exact words.
+
+The technical bit: I'm using HuggingFace's sentence transformers (specifically the all-MiniLM-L6-v2 model) to convert both client queries and provider descriptions into 384-dimensional vectors. Then PostgreSQL's pgvector extension finds the closest semantic matches using cosine similarity. But you don't need to know any of that - you just get results that actually make sense.
+
+### Real-Time Communication That Actually Works 💬
+
+Once you've found someone, you need to talk to them, right? But here's the thing - I didn't want to build "yet another chat app." I wanted something that felt natural, like you're having a real conversation, not trading emails back and forth.
+
+So I built the chat system on Supabase's real-time infrastructure. Messages appear instantly - no refresh needed. You can see when someone's online. The conversation flows naturally. And everything's saved, so you can always go back and reference what was discussed.
+
+The cool part? I'm using WebSocket connections under the hood, but it's all abstracted away. You just see messages appearing, like magic.
+
+### Two Sides of the Same Coin
+
+Building LegalEase meant thinking about two completely different user experiences:
+
+**For Clients:** The journey needed to be simple. Sign up, describe your problem, get matched with someone who can help. No complicated forms, no legal vocabulary tests. Just tell your story.
+
+**For Providers:** They needed tools to manage their practice. A dashboard to track requests, analytics to understand their business, and a professional profile that showcases their expertise without feeling like a resume.
+
+The tricky part? Making both experiences feel native, not like one was an afterthought. I spent a lot of time on the transitions between states - from pending requests to approved to closed - making sure each status change made sense and provided the right actions at the right time.
+
+## Features That Solved Real Problems
+
+### Progressive Profile Building
+
+Nobody likes filling out long forms. I certainly don't. So instead of hitting you with a massive registration form, LegalEase asks for information progressively. Username first (because you need something to be called). Then basic info when you're ready. Address details when you need them. And for providers, the professional details come last.
+
+Each section is its own accordion item - complete what you want, when you want. The system tracks what's done and what's still needed, but never blocks you from exploring the platform.
+
+### Smart Request Lifecycle
+
+Requests go through a clear lifecycle: Pending → Approved/Rejected → Closed. But here's what makes it smart:
+
+- **Pending:** Providers can see the full request before deciding. If they reject, they have to provide a reason (keeps things professional and gives feedback to clients).
+
+- **Approved:** This is where the magic happens. Chat unlocks automatically. Both parties can communicate freely. The request stays in this state until the work is done.
+
+- **Closed:** Only clients can close requests (after they're approved). This prevents awkward situations where a provider marks something done but the client isn't satisfied.
+
+- **Rejected:** These don't just disappear. Both parties can see them with the rejection reason, which helps clients refine future requests and keeps a paper trail.
+
+### Provider Analytics Dashboard
+
+If you're running a legal practice, you need to understand your business. So I built a dashboard that shows:
+
+- **Request Distribution:** A pie chart breaking down your requests by status. Quick visual reference for where things stand.
+
+- **Trend Analysis:** Week-over-week changes for each status. Are more requests coming in? Are you accepting more? Are clients closing satisfied?
+
+- **Status Cards:** At-a-glance numbers with trend indicators (those little arrows that tell you if things are going up or down).
+
+This wasn't about overwhelming providers with data - it was about giving them actionable insights at a glance.
+
+### Vector Search Explained (Non-Technically)
+
+Okay, I need to geek out for a second about the search system because it's genuinely cool.
+
+Traditional search works like this: You type "divorce lawyer," it looks for those exact words, returns results. Simple, but limited.
+
+Vector search works differently. It converts your entire description into a mathematical representation that captures the *meaning*. Then it finds provider descriptions with similar meanings.
+
+Real example: A client types "My spouse and I are separating and need help dividing our assets." They never said "divorce" or "lawyer," but the system understands they need family law expertise, specifically in divorce and asset division. The vector search picks up on concepts like "separating" (related to divorce), "dividing assets" (related to property settlements), and matches with providers who describe similar expertise.
+
+It's like having a really smart assistant who understands context, not just keywords.
+
+## The Technical Foundation
+
+### Why Next.js?
+
+I chose Next.js 15 for this project because of its App Router and server components. Some pages (like provider profiles) are server-rendered for SEO and performance. Others (like the chat) are fully client-side for interactivity. Next.js lets me mix and match without fighting the framework.
+
+Plus, the file-based routing meant I could organize features cleanly - each major section got its own folder, each dynamic route was clear and obvious.
+
+### Why Supabase?
+
+Three words: Real-time, Auth, Storage. 
+
+I needed real-time for chat, auth for user management, and storage for profile pictures. Supabase gave me all three with a single SDK. Plus, it's PostgreSQL underneath, which meant I could install pgvector for the vector search functionality.
+
+Row Level Security (RLS) policies meant I could secure data at the database level - clients can only see their own requests, providers only see requests directed to them, etc. Security by default, not by hoping I didn't mess up the API.
+
+### Why HeroUI?
+
+I needed components that looked professional out of the box but could be customized. HeroUI (a NextUI fork) provided exactly that - beautiful defaults, Tailwind-based styling, and excellent TypeScript support.
+
+The Form components especially made validation easy. The Modal system handled all the complex focus management and accessibility concerns. And the Card components... chef's kiss.
+
+## Challenges I Faced
+
+### The Embedding Generation Problem
+
+Initially, I tried generating embeddings on the client side. Terrible idea. The model files were huge, the browser would choke, and it was slow as molasses.
+
+Solution? Move it to an API route that calls HuggingFace's Inference API. Now embeddings generate in under a second, the client never downloads the model, and I can cache results if needed.
+
+### Real-Time Chat Subscription Management
+
+Supabase real-time is awesome, but managing subscriptions correctly took some trial and error. If you don't clean up properly, you end up with memory leaks or duplicate messages.
+
+I ended up using React's useEffect cleanup functions religiously, making sure every subscription has a corresponding unsubscribe when the component unmounts.
+
+### File Uploads That Don't Suck
+
+File uploads are always a pain. I wanted profile pictures to work smoothly - drag and drop would've been nice, but I settled for a clean file input with preview.
+
+The trick was handling the upload before the form submission, getting back a URL, then including that URL in the profile update. Supabase Storage made the actual upload easy, but coordinating the timing was tricky.
+
+## What's Next?
+
+LegalEase is functional and useful, but there's always room for improvement:
+
+- **Email Notifications:** When someone accepts your request or sends you a message, you should know about it.
+
+- **Rating System:** After closing a request, let clients rate their experience. Help future clients make informed decisions.
+
+- **Advanced Filtering:** Right now search results come back sorted by relevance. What if you also want to filter by experience level, location, or price range?
+
+- **Mobile App:** The site is responsive, but a native mobile app would unlock features like push notifications and offline access.
+
+- **Payment Integration:** Currently, LegalEase just connects people. Integrating payment processing would make it a complete platform.
+
+## Wrapping Up
+
+Building LegalEase taught me a lot about balancing complexity with usability. Vector search is complex, but to users, it's just "search that works better." Real-time infrastructure is complex, but users just see messages appearing instantly.
+
+The best technology is invisible. It solves problems so smoothly that users don't even realize there was a problem to solve.
+
+If you're building something similar, here's my advice: Start with the user experience. What do they need to accomplish? What's frustrating about current solutions? Then work backward to the technology. Not the other way around.
+
+And if you want to dive into the code, it's all [open source on GitHub](https://github.com/satvikvirmani/legalease). Fork it, improve it, learn from it. That's what it's there for.
+
+---
+
+*Built with Next.js, Supabase, and a lot of coffee. Questions? Open an issue on GitHub or reach out directly.*
