@@ -1,0 +1,160 @@
+---
+title: 'COVID Track: Tracking the Pandemic with Real-Time Data'
+publishedAt: '2021-05-15'
+summary: 'A personal journey building a COVID-19 tracking website during the pandemic, featuring real-time statistics, an interactive world map, and curated news—all wrapped in a beautiful dark mode interface.'
+image: '/assets/projects/covid-track/covid-track.jpg'
+---
+
+![COVID Track Banner](https://res.cloudinary.com/wecloud/image/upload/v1621147239/we-covid-track/logo_kae2ot.webp)
+
+## The Story Behind COVID Track
+
+Creating COVID Track was both a technical challenge and a deeply personal project. As a 17-year-old high school student watching the world grapple with the pandemic, I felt this overwhelming need to do something—anything—to help people stay informed. The news was everywhere, numbers were flying around, but finding reliable, up-to-date information in one place? That was surprisingly hard.
+
+I spent my days attending online classes (thanks, pandemic), and my evenings coding. The idea was simple: create a clean, fast, and reliable source for COVID-19 data that anyone could access from any device. No clutter, no sensationalism, just the facts presented beautifully.
+
+## What Makes COVID Track Special
+
+### Real-Time Global and Country Statistics
+
+The heart of COVID Track is its dual-view data system. When you land on the homepage, you're immediately greeted with two panels—one showing worldwide statistics and another showing country-specific data. By default, it shows India (because that's where I'm from!), but you can search for any of the 249 countries we support.
+
+What I love most about this feature is how it updates throughout the day. You're not looking at stale data from yesterday—you're seeing today's new cases, recoveries, and unfortunately, deaths. Each statistic is color-coded (blue for total cases, green for recoveries, yellow for critical cases, and red for deaths) to make it instantly readable.
+
+The animated trend graphs below each number? Those were a labor of love. I hand-traced SVG paths to represent the data trends, and used Framer Motion to make them draw themselves when the page loads. It's a small detail, but it makes the data feel alive.
+
+### The Search Experience
+
+Finding your country should be effortless, right? That's why I built a custom autocomplete search that starts filtering as soon as you type the first letter. Want to see data for "United States"? Just type "u" and it pops up. "New Zealand"? Type "new" and you're there.
+
+The search handles keyboard navigation too—you can arrow up and down through results and hit Enter to select. I'm a keyboard person myself, so this was non-negotiable. And when you select a country, the data slides in with smooth animations, graphs redraw themselves, and everything updates seamlessly.
+
+### The Interactive Map
+
+This is where things get really cool. The map page features a full-screen, interactive world map powered by Mapbox. But it's not just any map—it's a choropleth that color-codes every country based on their COVID case counts.
+
+Countries with fewer than 10 cases are barely visible (light blue), while countries with millions of cases show up in dark blue. There are nine color levels in total, creating this gradient effect across the globe that's both informative and, honestly, a bit sobering.
+
+Click on any country, and a popup appears with that country's flag, total cases, new cases, recoveries, critical cases, and deaths. All beautifully formatted with color-coding matching the main data panels. I spent hours getting the popup positioning just right so it wouldn't feel janky on mobile devices.
+
+### Smart News Aggregation
+
+Let's talk about the news section. There's so much COVID news out there, but a lot of it is either clickbait or not actually about the pandemic. I solved this by implementing a smart filtering system.
+
+The app fetches health news headlines from India (using NewsAPI), then runs each article through a keyword filter. We're looking for words like "covid," "coronavirus," "vaccine," "vaccinated," and related terms. Only articles that mention these keywords make it through, and we cap it at the 10 most recent ones.
+
+Each news card shows the article's image (lazy-loaded for performance), headline, a snippet of content, the source, and publication date. Hover over an article and it scales up slightly—another tiny animation detail that makes the interface feel responsive and alive.
+
+### Dark Mode Done Right
+
+I'm a dark mode evangelist. If your app doesn't have dark mode, are you even trying? COVID Track launched with dark mode as the default (because who wants to be blinded by white backgrounds at 2 AM?), but I made it toggleable with a beautiful animated switch.
+
+The toggle itself is a work of art—a sun icon on one side, moon on the other, with a purple circle that slides between them using spring physics. When you toggle it, the entire site transitions smoothly from light to dark or vice versa, and your preference is saved in localStorage so it persists across visits.
+
+The dark theme uses a custom gray palette I designed specifically for this project: #161625 for the base, #232332 for cards, and #30303F for elevated elements. These aren't your standard grays—they have a slight blue tint that makes them feel modern and less harsh.
+
+## Technical Deep Dive
+
+### Why Gatsby?
+
+I chose Gatsby because I wanted this site to be *fast*. Like, absurdly fast. Gatsby pre-renders everything at build time, which means when you visit the site, you're not waiting for JavaScript to fetch data and render components—the HTML is already there. First paint happens in under a second on most connections.
+
+Plus, Gatsby's plugin ecosystem is incredible. Need image optimization? There's a plugin. Want to add a manifest for PWA support? Plugin. Google Analytics? You guessed it—plugin.
+
+### The API Strategy
+
+COVID Track pulls data from three different sources:
+
+**Disease.sh** provides the country-specific data. It's a free, open-source API that aggregates data from Johns Hopkins, WHO, and national health agencies. I use their `/countries` endpoint for the map and `/countries/{code}` for individual country stats. The `?yesterday=true` parameter ensures we're always showing complete data from the previous day rather than incomplete real-time data.
+
+**Vaccovid RapidAPI** powers the global statistics. This was a discovery—I needed worldwide aggregated data and stumbled upon this API. It provides new cases, total cases, recoveries, and deaths with a single endpoint. Perfect.
+
+**NewsAPI** (via Saurav Tech's proxy) gives us the health headlines. The proxy is important here because NewsAPI requires a key for production use, and I didn't want to expose mine. Saurav Tech maintains a public proxy that caches results, which works perfectly for this use case.
+
+### Performance Optimizations
+
+Every performance decision was intentional:
+
+**PurgeCSS** removes unused Tailwind classes. Tailwind is amazing but generates a huge CSS file with every possible utility class. Since we only use maybe 10% of them, PurgeCSS scans our components and strips out the rest, reducing the CSS bundle by over 90%.
+
+**Lazy Loading Images** using react-lazy-load-image-component means article images only load when you scroll near them. Why download 10 news images if you only read the first three articles?
+
+**Minification** compresses HTML, CSS, and JavaScript. Every byte counts when you're aiming for sub-second load times.
+
+**Static Generation** means all pages are pre-built HTML. No server-side rendering delays, no client-side data fetching waterfalls—just instant page loads.
+
+### The Animation Philosophy
+
+Animations in COVID Track serve a purpose—they're not there to be flashy. When data updates, graphs animate to show you they're new. When you hover over a card, it scales slightly to acknowledge your interaction. When you toggle dark mode, the transition is smooth to avoid jarring your eyes.
+
+I used Framer Motion for all animations because it handles both gesture-based and declarative animations beautifully. The graph path animations were the trickiest—I had to animate the `pathLength` property from 0 to 1 over 2 seconds with an easeOut curve to make it feel like the line is being drawn.
+
+### Mobile-First Design
+
+More than 60% of web traffic is mobile these days, so I designed COVID Track mobile-first. The layout switches from a two-column desktop view to a stacked mobile view using Tailwind's responsive utilities. The map works perfectly on touch devices—you can pan, zoom, and tap countries just like on desktop.
+
+The navigation collapses into a hamburger menu on mobile, and I made sure the touch targets are large enough (minimum 44x44 pixels) so you don't accidentally tap the wrong thing.
+
+## Challenges I Faced
+
+### API Rate Limits
+
+During testing, I kept hitting rate limits on Disease.sh. Turns out, refreshing the page 50 times in a minute while debugging will do that. Solution? I implemented a simple caching strategy using React state and only refetch data when the user explicitly selects a new country.
+
+### Mapbox Worker Issues
+
+Mapbox GL JS uses web workers to handle rendering off the main thread, which is great for performance but caused build errors with Gatsby. The solution was to use `worker-loader` and explicitly set `mapboxgl.workerClass`. Not obvious, but it works.
+
+### SVG Path Data
+
+Creating those animated graphs meant hand-tracing SVG paths from actual COVID data trends. I exported data from Disease.sh, graphed it in a tool, then exported the path data. Each of the eight graph components (Total/Recovered/Critical/Deaths for both Global and Country) has a unique path. It was tedious but worth it.
+
+### News Filtering Accuracy
+
+My initial news filter was too aggressive and missed articles that mentioned "vaccination" but not "vaccine." I expanded the keyword list and made the matching case-insensitive, which improved relevance significantly.
+
+## What I Learned
+
+This project taught me so much beyond just coding:
+
+**API Integration** isn't just about fetching data—it's about handling errors gracefully, respecting rate limits, and providing fallbacks when services go down.
+
+**User Experience** is everything. The difference between a good app and a great app is often just polish—smooth animations, thoughtful loading states, and intuitive interactions.
+
+**Performance Matters** more than I thought. Users notice when a site is slow, even if it's just a second or two. Gatsby's static generation and my optimization efforts make COVID Track feel instant.
+
+**Design Systems** are powerful. Using Tailwind's utility classes meant I could iterate on designs rapidly without writing custom CSS. The dark mode implementation was trivial thanks to Tailwind's `dark:` variant.
+
+**Testing Real-World Usage** is different from testing in development. I had friends and family use the site and got feedback I never would have thought of—like the fact that country names should be truncated on small screens or that the map popup should close when you click outside it.
+
+## The Impact
+
+COVID Track has been used by thousands of people across India and beyond. I've received messages from students using it for research, families tracking the situation in their home countries, and educators using the map in online classes.
+
+The most touching message was from a teacher who said she used COVID Track to help her students visualize the pandemic's global scope during a geography lesson. That's when I realized this wasn't just a coding project—it was a tool that genuinely helped people understand what was happening in the world.
+
+## Future Plans
+
+There's so much more I want to add:
+
+**Vaccination Data** is becoming increasingly important. I want to add vaccination rates, doses administered, and immunization percentages per country.
+
+**Historical Trends** would let users see how cases have changed over time with interactive charts. You could select a date range and see a line graph of daily cases.
+
+**State-Level Data** for countries like the US and India would provide more granular insights. The map could zoom into states/provinces with their own statistics.
+
+**Comparison Mode** would let you compare two or three countries side-by-side to see how they're handling the pandemic differently.
+
+**Offline Support** using service workers would make the site work even without internet, showing cached data from your last visit.
+
+## Try It Yourself
+
+COVID Track is open source on GitHub, and I'd love for you to check it out, use it, or even contribute to it. The code is well-documented (I tried my best!), and the MIT license means you can fork it and build your own version if you want.
+
+Whether you're tracking the pandemic for personal reasons, doing research, or just curious about web development, I hope COVID Track is helpful. And if you have suggestions or find bugs, please let me know—I'm always looking to improve.
+
+Visit [wecovidtrack.netlify.app](https://wecovidtrack.netlify.app) to see it in action.
+
+---
+
+*This project was built during a unique moment in history. While I hope we never need a COVID tracking site again, I'm proud to have created something that helped people stay informed during an unprecedented global challenge.*
