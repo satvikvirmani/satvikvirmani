@@ -10,7 +10,7 @@ const Resume = () => {
   return (
     <section className="p-4 md:p-16 w-full">
       <a
-        href="/assets/resume/resume.pdf"
+        href="/assets/resume/resumev1.docx"
         className="w-full block p-8 text-start bg-gray-100 dark:bg-gray-800 rounded-2xl"
         download
       >
@@ -22,18 +22,34 @@ const Resume = () => {
         <h1 className="text-center text-xl font-bold">Experience</h1>
         <Accordian
           disabled={false}
+          post="Intern Analyst"
+          date="June, 2025 - August, 2025"
+          organisation="Wells Fargo"
+        >
+          <ul className="text-sm">
+            <li>
+              Implemented log monitoring and analysis using Splunk Enterprise and Grafana, resulting in a 30% reduction in mean time to
+resolution (MTTR) for critical incidents.
+            </li>
+            <li>
+              Diagnosed and traced high-impact anomalies and exceptions, by developing alerting pipelines with SPL and regex, leading to
+faster detection of infrastructure issues and improved alert accuracy.
+            </li>
+          </ul>
+        </Accordian>
+        <Accordian
+          disabled={false}
           post="Research Fellow"
-          date="August, 2024 - Present"
+          date="August, 2024 - May, 2025"
           organisation="MeitY, Government of India"
         >
           <ul className="text-sm">
             <li>
-              Working on the “Crop Health Monitoring and Yield Prediction using
-              Deep Learning with Drone Imagery” project.
+              Designed deep learning models for crop health assessment, achieving 94% accuracy in yield prediction using drone imagery.
             </li>
             <li>
-              Assisting in development of deep learning models for analyzing
-              drone imagery to monitor crop health and predict yield.
+              Applied advanced image preprocessing, feature extraction, and data cleaning techniques to enhance model performance and
+              scalability.
             </li>
           </ul>
         </Accordian>
@@ -45,12 +61,11 @@ const Resume = () => {
         >
           <ul className="text-sm">
             <li>
-              Engaged in system administrative tasks, streamlining
-              identification, tracking, and resolution of incidents.
+              Managed system administration tasks to streamline incident identification, tracking, and resolution, improving operational
+              efficiency by 25%.
             </li>
             <li>
-              Implemented robust change management processes to minimize service
-              disruptions.
+              Implemented structured change management protocols, reducing unplanned service disruptions and increasing system uptime.
             </li>
           </ul>
         </Accordian>
@@ -62,7 +77,7 @@ const Resume = () => {
           disabled={true}
           post="National Institute of Technology, Kurukshetra"
           date="November, 2022 - Present"
-          organisation="B.Tech in Computer and Engineering with a CGPA of 9.21"
+          organisation="B.Tech in Computer and Engineering with a CGPA of 9.08"
         >
           <></>
         </Accordian>
@@ -300,6 +315,58 @@ const Resume = () => {
               className="0"
               alt="firebase"
               src="/assets/icons/cloud/firebase.svg"
+              width={20}
+              height={20}
+            />
+            <span className="w-px bg-black h-5"></span>
+            <Image
+              className="0"
+              alt="firebase"
+              src="/assets/icons/cloud/googlecloud.svg"
+              width={20}
+              height={20}
+            />
+            <span className="w-px bg-black h-5"></span>
+            <Image
+              className="0"
+              alt="firebase"
+              src="/assets/icons/cloud/splunk.svg"
+              width={20}
+              height={20}
+            />
+          </div>
+        </div>
+        <div>
+          <h1 className="mb-2 font-medium">Tools</h1>
+          <div className="flex flex-row flex-wrap gap-4 align-middle items-center">
+            <Image
+              className="0"
+              alt="firebase"
+              src="/assets/icons/tools/git.svg"
+              width={20}
+              height={20}
+            />
+            <span className="w-px bg-black h-5"></span>
+            <Image
+              className="0"
+              alt="firebase"
+              src="/assets/icons/tools/linux.svg"
+              width={20}
+              height={20}
+            />
+            <span className="w-px bg-black h-5"></span>
+            <Image
+              className="0"
+              alt="firebase"
+              src="/assets/icons/tools/postman.svg"
+              width={20}
+              height={20}
+            />
+            <span className="w-px bg-black h-5"></span>
+            <Image
+              className="0"
+              alt="firebase"
+              src="/assets/icons/tools/grafana.svg"
               width={20}
               height={20}
             />
