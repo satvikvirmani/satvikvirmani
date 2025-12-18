@@ -11,8 +11,8 @@ export async function generateStaticParams() {
   }))
 }
 
-export async function generateMetadata({ params }: {params: any}) {
-  const {slug} = await params;
+export async function generateMetadata({ params }: { params: any }) {
+  const { slug } = await params;
 
   const post = getProjectPosts().find((post) => post.slug === slug)
   if (!post) {
@@ -21,6 +21,7 @@ export async function generateMetadata({ params }: {params: any}) {
 
   const {
     title,
+    subtitle,
     publishedAt: publishedTime,
     summary: description,
     image,
@@ -34,6 +35,7 @@ export async function generateMetadata({ params }: {params: any}) {
     description,
     openGraph: {
       title,
+      subtitle,
       description,
       type: 'article',
       publishedTime,
@@ -53,8 +55,8 @@ export async function generateMetadata({ params }: {params: any}) {
   }
 }
 
-export default async function Project({ params }: {params: any}) {
-  const {slug} = await params;
+export default async function Project({ params }: { params: any }) {
+  const { slug } = await params;
 
   const post = getProjectPosts().find((post) => post.slug === slug)
 
@@ -87,7 +89,15 @@ export default async function Project({ params }: {params: any}) {
         }}
       />
       <h1 className="title font-semibold text-2xl tracking-tighter">
-        {post.metadata.title}
+        <span className="title font-semibold text-2xl tracking-tighter">
+          {post.metadata.title}
+        </span>
+        <span className="mx-1">
+          -
+        </span>
+        <span className="title font-semibold text-2xl tracking-tighter text-neutral-400">
+          {post.metadata.subtitle}
+        </span>
       </h1>
       <div className="flex justify-between items-center mt-2 mb-8 text-sm">
         <p className="text-sm text-neutral-600 dark:text-neutral-400">

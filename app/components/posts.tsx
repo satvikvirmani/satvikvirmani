@@ -28,6 +28,12 @@ export function ProjectPosts() {
                 <p className="text-lg font-medium text-neutral-900 dark:text-neutral-100 tracking-tight">
                   {post.metadata.title}
                 </p>
+                <span className="mx-1">
+                  -
+                </span>
+                <p className="text-lg font-medium text-neutral-400 dark:text-neutral-100 tracking-tight">
+                  {post.metadata.subtitle}
+                </p>
                 <p className="text-sm text-neutral-600 dark:text-neutral-400 w-[100px] tabular-nums">
                   {formatDate(post.metadata.publishedAt, false)}
                 </p>
