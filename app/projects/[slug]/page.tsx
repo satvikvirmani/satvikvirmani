@@ -88,17 +88,12 @@ export default async function Project({ params }: { params: any }) {
           }),
         }}
       />
-      <h1 className="title font-semibold text-2xl tracking-tighter">
-        <span className="title font-semibold text-2xl tracking-tighter">
-          {post.metadata.title}
-        </span>
-        <span className="mx-1">
-          -
-        </span>
-        <span className="title font-semibold text-2xl tracking-tighter text-neutral-400">
-          {post.metadata.subtitle}
-        </span>
+      <h1 className="title font-semibold text-3xl tracking-tighter">
+        {post.metadata.title}
       </h1>
+      <h2 className="font-semibold text-xl tracking-tighter text-neutral-500">
+        {post.metadata.subtitle}
+      </h2>
       <div className="flex justify-between items-center mt-2 mb-8 text-sm">
         <p className="text-sm text-neutral-600 dark:text-neutral-400">
           {formatDate(post.metadata.publishedAt)}

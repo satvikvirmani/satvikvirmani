@@ -25,16 +25,18 @@ export function ProjectPosts() {
             <div className="flex flex-col md:flex-row items-center gap-4">
               <Image alt={post.metadata.title} src={post.metadata.image} width={200} height={200} />
               <div className="flex flex-col justify-center">
-                <p className="text-lg font-medium text-neutral-900 dark:text-neutral-100 tracking-tight">
-                  {post.metadata.title}
+                <p>
+                  <span className="text-lg font-medium text-neutral-900 dark:text-neutral-100 tracking-tight">
+                    {post.metadata.title}
+                  </span>
+                  <span className="mx-1">
+                    -
+                  </span>
+                  <span className="text-lg font-medium text-neutral-500 dark:text-neutral-100 tracking-tight">
+                    {post.metadata.subtitle}
+                  </span>
                 </p>
-                <span className="mx-1">
-                  -
-                </span>
-                <p className="text-lg font-medium text-neutral-400 dark:text-neutral-100 tracking-tight">
-                  {post.metadata.subtitle}
-                </p>
-                <p className="text-sm text-neutral-600 dark:text-neutral-400 w-[100px] tabular-nums">
+                <p className="text-sm text-neutral-600 dark:text-neutral-400 w-full my-2 tabular-nums">
                   {formatDate(post.metadata.publishedAt, false)}
                 </p>
               </div>
