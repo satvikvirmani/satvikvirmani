@@ -7,7 +7,7 @@ export function ProjectPosts() {
   const allProjects = getProjectPosts()
 
   return (
-    <div className="flex flex-col gap-16 mx-auto max-w-lg">
+    <div className="flex flex-col gap-16 mx-auto max-w-2xl">
       {allProjects
         .sort((a, b) => {
           if (
@@ -23,7 +23,7 @@ export function ProjectPosts() {
             href={`/projects/${post.slug}`}
           >
             <div className="flex flex-col md:flex-row items-center gap-4">
-              <Image alt={post.metadata.title} src={post.metadata.image} width={200} height={200} />
+              <Image alt={post.metadata.title} src={post.metadata.image} width={300} height={300} />
               <div className="flex flex-col justify-center">
                 <p>
                   <span className="text-lg font-medium text-neutral-900 dark:text-neutral-100 tracking-tight">
