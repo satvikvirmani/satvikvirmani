@@ -38,7 +38,7 @@ export function ContactSection() {
               fontWeight: '700',
             }}
           >
-            Let's Build
+            Let&apos;s Build
             <br />
             <span className="ml-16 bg-gradient-to-r from-[#00f0ff] via-[#b444ff] to-[#ff006e] bg-clip-text text-transparent">
               Something
@@ -146,7 +146,7 @@ export function ContactSection() {
                   Get in Touch
                 </h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  I'm always open to discussing new projects, creative ideas, or opportunities
+                  I&apos;m always open to discussing new projects, creative ideas, or opportunities
                   to be part of your vision. Feel free to reach out!
                 </p>
               </div>
