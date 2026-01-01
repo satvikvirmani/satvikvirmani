@@ -2,9 +2,9 @@ import type { MetadataRoute } from 'next'
  
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Portfolio | Satvik Virmani',
+    name: 'Portfolio | Aarju Sah',
     short_name: 'Portfolio',
-    description: 'Portfolio | Satvik Virmani',
+    description: 'Portfolio | Aarju Sah',
     start_url: '/',
     display: 'standalone',
     background_color: '#fff',

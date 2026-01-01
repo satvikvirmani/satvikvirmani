@@ -1,39 +1,43 @@
 "use client";
 import { motion } from 'framer-motion';
-import { Palette, ArrowUpRight } from 'lucide-react';
+import { Palette } from 'lucide-react';
+// import { ArrowUpRight } from 'lucide-react';
 import { MetallicDivider } from './MetallicDivider';
+import Image from 'next/image';
 
 const uiuxProjects = [
   {
-    title: 'Fintech Dashboard Redesign',
-    type: 'Case Study',
-    challenge: 'Complex financial data overwhelming users',
-    solution: 'Progressive disclosure with smart data hierarchies',
-    impact: '+156% user engagement, -42% support tickets',
-    image: 'https://images.unsplash.com/photo-1618761714954-0b8cd0026356?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWIlMjBkZXNpZ24lMjBpbnRlcmZhY2V8ZW58MXx8fHwxNzY2NzU2MjMzfDA&ixlib=rb-4.1.0&q=80&w=1080',
-    color: '#ff006e',
-    tags: ['User Research', 'Information Architecture', 'Design System'],
-  },
-  {
-    title: 'AI-Powered Learning Platform',
-    type: 'Product Design',
-    challenge: 'Making ML concepts accessible to beginners',
-    solution: 'Interactive visualizations with gamified learning paths',
-    impact: '4.8/5 rating, 200K+ active learners',
-    image: 'https://images.unsplash.com/photo-1587522384446-64daf3e2689a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtaW5pbWFsaXN0JTIwd29ya3NwYWNlfGVufDF8fHx8MTc2NjY4MDc0Nnww&ixlib=rb-4.1.0&q=80&w=1080',
-    color: '#ffd60a',
-    tags: ['Interaction Design', 'Motion', 'React'],
-  },
-  {
-    title: 'Healthcare Mobile App',
+    title: 'myScheduler',
     type: 'UX/UI Design',
-    challenge: 'Simplifying patient-doctor communication',
-    solution: 'Secure messaging with smart appointment scheduling',
-    impact: '94% patient satisfaction, HIPAA compliant',
-    image: 'https://images.unsplash.com/photo-1630432198429-e5bebf02a377?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxob2xvZ3JhcGhpYyUyMGdyYWRpZW50fGVufDF8fHx8MTc2NjcwNjU5MXww&ixlib=rb-4.1.0&q=80&w=1080',
-    color: '#00f0ff',
-    tags: ['Mobile Design', 'Accessibility', 'Figma'],
+    challenge: 'Students struggling with fragmented academic information, missed schedules, and low engagement due to cluttered and disconnected education apps',
+    solution: 'A unified, student-first design with intuitive navigation, progressive disclosure of academic data, and consistent visual language across scheduling, attendance, reports, and collaboration features',
+    impact: 'Improved academic organization, increased daily app usage, reduced missed classes and deadlines, and stronger peer collaboration',
+    image: '/assets/myscheduler.webp',
+    color: '#ff006e',
+    tags: [
+      'Education UX',
+      'Mobile App Design',
+      'Information Architecture',
+      'User-Centered Design',
+      'Design System'
+    ],
   },
+  {
+    title: 'weWrite',
+    type: 'UX/UI Design',
+    challenge: 'Aspiring writers lacked a dedicated, aesthetically pleasing platform to express creativity, discover poetry, and meaningfully connect with a like-minded writing community',
+    solution: 'A creativity-first social writing experience with immersive content discovery, seamless onboarding, expressive post-creation tools, and strong community interaction through profiles, likes, comments, and sharing',
+    impact: 'Increased creative engagement, higher content sharing, stronger writer-to-writer connections, and improved retention through a sense of belonging and self-expression',
+    image: '/assets/wewrite.webp',
+    color: '#8338ec',
+    tags: [
+      'Creative UX',
+      'Social App Design',
+      'Content Discovery',
+      'Community Building',
+      'Mobile UI Design'
+    ],
+  }
 ];
 
 export function UIUXSection() {
@@ -90,9 +94,10 @@ export function UIUXSection() {
                     whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <img
+                    <Image
                       src={project.image}
                       alt={project.title}
+                      fill={true}
                       className="w-full h-full object-cover"
                     />
 
@@ -119,8 +124,8 @@ export function UIUXSection() {
                 {/* Content - Overlapping layout */}
                 <div
                   className={`col-span-12 ${index % 2 === 0
-                      ? 'lg:col-span-6 lg:col-start-6 lg:-mt-24'
-                      : 'lg:col-span-7 lg:col-start-1 lg:row-start-1 lg:mt-24'
+                    ? 'lg:col-span-6 lg:col-start-6 lg:-mt-24'
+                    : 'lg:col-span-7 lg:col-start-1 lg:row-start-1 lg:mt-24'
                     }`}
                 >
                   <div className="bg-card/95 backdrop-blur-md border border-border p-8 lg:p-12 space-y-6">
@@ -171,10 +176,10 @@ export function UIUXSection() {
                     </div>
 
                     {/* Link */}
-                    <button className="group flex items-center gap-2 text-sm font-mono hover:gap-4 transition-all pt-4">
+                    {/* <button className="group flex items-center gap-2 text-sm font-mono hover:gap-4 transition-all pt-4">
                       <span style={{ color: project.color }}>VIEW CASE STUDY</span>
                       <ArrowUpRight size={16} style={{ color: project.color }} />
-                    </button>
+                    </button> */}
                   </div>
                 </div>
               </div>

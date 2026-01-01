@@ -156,8 +156,8 @@ export function ContactSection() {
                 <Mail className="text-[#00f0ff] mt-1 group-hover:scale-110 transition-transform" size={24} />
                 <div>
                   <p className="text-sm font-mono text-muted-foreground mb-1">EMAIL</p>
-                  <a href="mailto:hello@example.com" className="text-lg hover:text-[#00f0ff] transition-colors">
-                    hello@example.com
+                  <a href="mailto:aarju.sahkv@gmail.com" className="text-lg hover:text-[#00f0ff] transition-colors">
+                    aarju.sahkv@gmail.com
                   </a>
                 </div>
               </div>
@@ -167,7 +167,7 @@ export function ContactSection() {
                 <h4 className="text-sm font-mono text-muted-foreground">CONNECT WITH ME</h4>
                 <div className="flex gap-4">
                   <motion.a
-                    href="https://github.com"
+                    href="https://github.com/aarjushah"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-14 h-14 border border-border bg-card flex items-center justify-center hover:border-[#00f0ff] hover:bg-[#00f0ff]/10 transition-all group"
@@ -177,7 +177,7 @@ export function ContactSection() {
                     <Github className="group-hover:text-[#00f0ff] transition-colors" size={24} />
                   </motion.a>
                   <motion.a
-                    href="https://linkedin.com"
+                    href="https://www.linkedin.com/in/aarjusah"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-14 h-14 border border-border bg-card flex items-center justify-center hover:border-[#b444ff] hover:bg-[#b444ff]/10 transition-all group"

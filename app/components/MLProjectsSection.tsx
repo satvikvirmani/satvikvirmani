@@ -3,68 +3,95 @@ import { motion } from 'framer-motion';
 import { Brain, ArrowUpRight } from 'lucide-react';
 import { MetallicDivider } from './MetallicDivider';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import Image from 'next/image';
 
 const projects = [
   {
-    title: 'Neural Style Transfer Engine',
-    category: 'Deep Learning',
-    description: 'Real-time artistic style transfer using optimized CNN architectures. Processes 4K images in under 2 seconds with custom GPU acceleration.',
-    metrics: {
-      accuracy: 94.7,
-      speed: '1.8s',
-      scale: '100K+ users',
-    },
-    chartData: [
-      { epoch: 1, loss: 2.4 },
-      { epoch: 2, loss: 1.8 },
-      { epoch: 3, loss: 1.2 },
-      { epoch: 4, loss: 0.8 },
-      { epoch: 5, loss: 0.5 },
-      { epoch: 6, loss: 0.3 },
-    ],
-    tags: ['PyTorch', 'CUDA', 'FastAPI', 'Redis'],
-    color: '#00f0ff',
-    image: 'https://images.unsplash.com/photo-1750969185331-e03829f72c7d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxuZXVyYWwlMjBuZXR3b3JrJTIwYWJzdHJhY3R8ZW58MXx8fHwxNzY2NzUyOTgzfDA&ixlib=rb-4.1.0&q=80&w=1080',
-  },
-  {
-    title: 'Sentiment Analysis Pipeline',
+    title: 'Youtube Chatbot',
     category: 'NLP / Machine Learning',
-    description: 'Multi-lingual sentiment classifier with 96% accuracy. Deployed as microservice handling 50M+ predictions monthly.',
-    metrics: {
-      accuracy: 96.2,
-      speed: '45ms',
-      scale: '50M/mo',
-    },
-    chartData: [
-      { category: 'Positive', count: 450 },
-      { category: 'Neutral', count: 320 },
-      { category: 'Negative', count: 230 },
+    description: 'Real-time artistic style transfer using optimized CNN architectures. Processes 4K images in under 2 seconds with custom GPU acceleration.',
+    metrics: [
+      {
+        name: 'Accuracy',
+        value: '91.52',
+      },
+      {
+        name: 'Response Time',
+        value: '1.36s',
+      },
+      {
+        name: 'Ingestion Time',
+        value: '3.12s',
+      },
     ],
-    tags: ['Transformers', 'BERT', 'Docker', 'Kubernetes'],
-    color: '#b444ff',
-    image: 'https://images.unsplash.com/photo-1762279389083-abf71f22d338?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYWNoaW5lJTIwbGVhcm5pbmclMjB2aXN1YWxpemF0aW9ufGVufDF8fHx8MTc2NjY4MTU1OXww&ixlib=rb-4.1.0&q=80&w=1080',
-  },
-  {
-    title: 'Anomaly Detection System',
-    category: 'Machine Learning',
-    description: 'Unsupervised learning model for real-time fraud detection in financial transactions. Reduced false positives by 73%.',
-    metrics: {
-      accuracy: 98.4,
-      speed: '12ms',
-      scale: '1B+ tx',
-    },
     chartData: [
-      { time: '00:00', anomalies: 12 },
-      { time: '04:00', anomalies: 8 },
-      { time: '08:00', anomalies: 45 },
-      { time: '12:00', anomalies: 67 },
-      { time: '16:00', anomalies: 89 },
-      { time: '20:00', anomalies: 34 },
+      { model: 'phi3', accuracy: 0.8651 },
+      { model: 'tinyllama', accuracy: 0.8774 },
+      { model: 'qwen2.5:0.5b', accuracy: 0.9040 },
+      { model: 'llama3', accuracy: 0.9101 },
+      { model: 'gemma2:2b', accuracy: 0.9152 },
     ],
-    tags: ['scikit-learn', 'Apache Kafka', 'PostgreSQL'],
-    color: '#00ff88',
-    image: 'https://images.unsplash.com/photo-1556075798-4825dfaaf498?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkYXRhJTIwdmlzdWFsaXphdGlvbiUyMGNvZGV8ZW58MXx8fHwxNzY2NzY4Nzk2fDA&ixlib=rb-4.1.0&q=80&w=1080',
+    tags: ['LangChain', 'Streamlit', 'RAG', 'Youtube'],
+    color: '#00f0ff',
+    image: '/assets/yt.jpeg',
   },
+  // {
+  //   title: 'Sentiment Analysis Pipeline',
+  //   category: 'NLP / Machine Learning',
+  //   description: 'Multi-lingual sentiment classifier with 96% accuracy. Deployed as microservice handling 50M+ predictions monthly.',
+  //   metrics: [
+  //     {
+  //       name: 'Accuracy',
+  //       value: '96.2',
+  //     },
+  //     {
+  //       name: 'Speed',
+  //       value: '45ms',
+  //     },
+  //     {
+  //       name: 'Scale',
+  //       value: '50M/mo',
+  //     },
+  //   ],
+  //   chartData: [
+  //     { category: 'Positive', count: 450 },
+  //     { category: 'Neutral', count: 320 },
+  //     { category: 'Negative', count: 230 },
+  //   ],
+  //   tags: ['Transformers', 'BERT', 'Docker', 'Kubernetes'],
+  //   color: '#b444ff',
+  //   image: 'https://images.unsplash.com/photo-1762279389083-abf71f22d338?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYWNoaW5lJTIwbGVhcm5pbmclMjB2aXN1YWxpemF0aW9ufGVufDF8fHx8MTc2NjY4MTU1OXww&ixlib=rb-4.1.0&q=80&w=1080',
+  // },
+  // {
+  //   title: 'Anomaly Detection System',
+  //   category: 'Machine Learning',
+  //   description: 'Unsupervised learning model for real-time fraud detection in financial transactions. Reduced false positives by 73%.',
+  //   metrics: [
+  //     {
+  //       name: 'Accuracy',
+  //       value: '98.4',
+  //     },
+  //     {
+  //       name: 'Speed',
+  //       value: '12ms',
+  //     },
+  //     {
+  //       name: 'Scale',
+  //       value: '1B+ tx',
+  //     },
+  //   ],
+  //   chartData: [
+  //     { time: '00:00', anomalies: 12 },
+  //     { time: '04:00', anomalies: 8 },
+  //     { time: '08:00', anomalies: 45 },
+  //     { time: '12:00', anomalies: 67 },
+  //     { time: '16:00', anomalies: 89 },
+  //     { time: '20:00', anomalies: 34 },
+  //   ],
+  //   tags: ['scikit-learn', 'Apache Kafka', 'PostgreSQL'],
+  //   color: '#00ff88',
+  //   image: 'https://images.unsplash.com/photo-1556075798-4825dfaaf498?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkYXRhJTIwdmlzdWFsaXphdGlvbiUyMGNvZGV8ZW58MXx8fHwxNzY2NzY4Nzk2fDA&ixlib=rb-4.1.0&q=80&w=1080',
+  // },
 ];
 
 export function MLProjectsSection() {
@@ -140,7 +167,15 @@ export function MLProjectsSection() {
 
                   {/* Metrics */}
                   <div className="grid grid-cols-3 gap-4 py-6">
-                    <div className="space-y-1">
+                    {project.metrics.map((metric, index) => (
+                      <div key={index} className="space-y-1">
+                        <p className="text-xs text-muted-foreground font-mono">{metric.name}</p>
+                        <p className="text-2xl font-bold" style={{ color: project.color }}>
+                          {metric.value}
+                        </p>
+                      </div>
+                    ))}
+                    {/* <div className="space-y-1">
                       <p className="text-xs text-muted-foreground font-mono">ACCURACY</p>
                       <p className="text-2xl font-bold" style={{ color: project.color }}>
                         {project.metrics.accuracy}%
@@ -157,7 +192,7 @@ export function MLProjectsSection() {
                       <p className="text-2xl font-bold" style={{ color: project.color }}>
                         {project.metrics.scale}
                       </p>
-                    </div>
+                    </div> */}
                   </div>
 
                   {/* Tags */}
@@ -188,9 +223,10 @@ export function MLProjectsSection() {
                 <div className="relative group">
                   {/* Background Image */}
                   <div className="relative overflow-hidden border border-border aspect-[4/3]">
-                    <img
+                    <Image
                       src={project.image}
                       alt={project.title}
+                      fill={true}
                       className="w-full h-full object-cover opacity-20 group-hover:opacity-30 transition-opacity"
                     />
 
@@ -198,24 +234,37 @@ export function MLProjectsSection() {
                     <div className="absolute inset-0 flex items-center justify-center p-8">
                       <div className="w-full h-full bg-card/80 backdrop-blur-md border border-border p-6">
                         <ResponsiveContainer width="100%" height="100%">
-                          {index === 1 ? (
+                          {index <= 1 ? (
                             <BarChart data={project.chartData}>
                               <CartesianGrid strokeDasharray="3 3" stroke="#27273a" />
-                              <XAxis dataKey="category" stroke="#a0a0b0" />
-                              <YAxis stroke="#a0a0b0" />
+                              <XAxis
+                                dataKey={index === 0 ? 'model' : 'category'}
+                                stroke="#a0a0b0"
+                                interval={0}
+                                tick={{ fontSize: 12 }}
+                              />
+                              <YAxis
+                                stroke="#a0a0b0"
+                                label={index === 0 ? {
+                                  value: 'Accuracy',
+                                  angle: -90,
+                                  position: 'insideLeft',
+                                  style: { fill: '#a0a0b0' }
+                                } : undefined}
+                              />
                               <Tooltip
                                 contentStyle={{
                                   backgroundColor: '#13131a',
                                   border: '1px solid #27273a',
                                 }}
                               />
-                              <Bar dataKey="count" fill={project.color} />
+                              <Bar dataKey={index === 0 ? 'accuracy' : 'count'} fill={project.color} />
                             </BarChart>
                           ) : (
                             <LineChart data={project.chartData}>
                               <CartesianGrid strokeDasharray="3 3" stroke="#27273a" />
                               <XAxis
-                                dataKey={index === 0 ? 'epoch' : 'time'}
+                                dataKey="time"
                                 stroke="#a0a0b0"
                               />
                               <YAxis stroke="#a0a0b0" />
@@ -227,7 +276,7 @@ export function MLProjectsSection() {
                               />
                               <Line
                                 type="monotone"
-                                dataKey={index === 0 ? 'loss' : 'anomalies'}
+                                dataKey="anomalies"
                                 stroke={project.color}
                                 strokeWidth={2}
                                 dot={{ fill: project.color }}

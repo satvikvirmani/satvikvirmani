@@ -13,41 +13,26 @@ const skillsData = [
   { skill: 'UI/UX', value: 82 },
 ];
 
-const experience = [
+const extracurriculars = [
   {
-    title: 'Senior ML Engineer',
-    company: 'AI Innovations Inc',
-    period: '2022 - Present',
-    description: 'Leading development of transformer-based models for NLP applications. Architected scalable ML pipelines processing 10M+ daily requests.',
-    tags: ['PyTorch', 'TensorFlow', 'AWS', 'Kubernetes'],
-  },
-  {
-    title: 'Full Stack Developer',
-    company: 'TechCorp Solutions',
-    period: '2020 - 2022',
-    description: 'Built responsive web applications with React and Node.js. Implemented real-time data visualization dashboards.',
-    tags: ['React', 'Node.js', 'D3.js', 'PostgreSQL'],
-  },
-  {
-    title: 'Data Scientist',
-    company: 'Analytics Pro',
-    period: '2018 - 2020',
-    description: 'Developed predictive models for customer behavior analysis. Deployed computer vision models for automated quality control.',
-    tags: ['Python', 'scikit-learn', 'OpenCV', 'Docker'],
+    title: 'Hospitality Head',
+    company: 'Managing and Directing Club',
+    period: '2023 - Present',
+    description: 'Managed logistics, budgeting, and vendor relations for events, resulting in successful programs.',
   },
 ];
 
 const education = [
   {
-    degree: 'M.S. Computer Science',
-    school: 'Stanford University',
-    period: '2016 - 2018',
-    focus: 'Machine Learning & AI',
+    degree: 'B.Tech. Computer Engineering',
+    school: 'National Institute of Technology, Kurukshetra',
+    period: '2022 - Present',
+    focus: 'Machine Learning & Software Development',
   },
   {
-    degree: 'B.S. Computer Engineering',
-    school: 'MIT',
-    period: '2012 - 2016',
+    degree: 'Senior Secondary Education',
+    school: 'Kendriya Vidyalaya,Embassy of India - Kathmandu ',
+    period: '2019 - 2021',
     focus: 'Software Systems',
   },
 ];
@@ -73,7 +58,7 @@ export function ResumeSection() {
               fontWeight: '700',
             }}
           >
-            Experience
+            Education
             <br />
             <span className="ml-12 text-[#00f0ff]">& Skills</span>
           </h2>
@@ -83,51 +68,6 @@ export function ResumeSection() {
         <div className="grid grid-cols-12 gap-12">
           {/* Left Column - Timeline */}
           <div className="col-span-12 lg:col-span-7 space-y-16">
-            {/* Experience */}
-            <div>
-              <div className="flex items-center gap-3 mb-8">
-                <Briefcase className="text-[#b444ff]" size={24} />
-                <h3 className="text-2xl font-bold" style={{ fontFamily: 'var(--font-display)' }}>
-                  Work Experience
-                </h3>
-              </div>
-
-              <div className="space-y-8 relative before:absolute before:left-0 before:top-0 before:bottom-0 before:w-[2px] before:bg-gradient-to-b before:from-[#00f0ff] before:via-[#b444ff] before:to-[#ff006e]">
-                {experience.map((exp, index) => (
-                  <motion.div
-                    key={index}
-                    className="pl-8 relative group"
-                    initial={{ opacity: 0, x: -30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.2 }}
-                  >
-                    {/* Timeline dot */}
-                    <div className="absolute left-0 top-2 w-3 h-3 rounded-full bg-[#00f0ff] -translate-x-[5px] group-hover:scale-150 transition-transform" />
-
-                    <div className="space-y-2">
-                      <div className="flex flex-wrap items-baseline gap-2">
-                        <h4 className="text-xl font-semibold">{exp.title}</h4>
-                        <span className="text-[#00f0ff] font-mono text-sm">@{exp.company}</span>
-                      </div>
-                      <p className="text-sm text-muted-foreground font-mono">{exp.period}</p>
-                      <p className="text-muted-foreground leading-relaxed">{exp.description}</p>
-                      <div className="flex flex-wrap gap-2 pt-2">
-                        {exp.tags.map((tag, i) => (
-                          <span
-                            key={i}
-                            className="px-3 py-1 text-xs border border-border bg-secondary/50 font-mono"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-
             {/* Education */}
             <div>
               <div className="flex items-center gap-3 mb-8">
@@ -156,6 +96,40 @@ export function ResumeSection() {
                       <span className="text-sm text-muted-foreground font-mono whitespace-nowrap">
                         {edu.period}
                       </span>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+            {/* extraci */}
+            <div>
+              <div className="flex items-center gap-3 mb-8">
+                <Briefcase className="text-[#b444ff]" size={24} />
+                <h3 className="text-2xl font-bold" style={{ fontFamily: 'var(--font-display)' }}>
+                  Extra-Curriculars
+                </h3>
+              </div>
+
+              <div className="space-y-8 relative before:absolute before:left-0 before:top-0 before:bottom-0 before:w-[2px] before:bg-gradient-to-b before:from-[#00f0ff] before:via-[#b444ff] before:to-[#ff006e]">
+                {extracurriculars.map((eic, index) => (
+                  <motion.div
+                    key={index}
+                    className="pl-8 relative group"
+                    initial={{ opacity: 0, x: -30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.2 }}
+                  >
+                    {/* Timeline dot */}
+                    <div className="absolute left-0 top-2 w-3 h-3 rounded-full bg-[#00f0ff] -translate-x-[5px] group-hover:scale-150 transition-transform" />
+
+                    <div className="space-y-2">
+                      <div className="flex flex-wrap items-baseline gap-2">
+                        <h4 className="text-xl font-semibold">{eic.title}</h4>
+                        <span className="text-[#00f0ff] font-mono text-sm">@{eic.company}</span>
+                      </div>
+                      <p className="text-sm text-muted-foreground font-mono">{eic.period}</p>
+                      <p className="text-muted-foreground leading-relaxed">{eic.description}</p>
                     </div>
                   </motion.div>
                 ))}
