@@ -5,22 +5,12 @@ import React, { FormEvent, useState } from 'react';
 const Contact = () => {
     const [sending, setSending] = useState(false);
 
-    interface FormElements extends HTMLFormControlsCollection {
-        name: HTMLInputElement;
-        email: HTMLInputElement;
-        message: HTMLTextAreaElement;
-    }
-
-    interface ContactForm extends HTMLFormElement {
-        readonly elements: FormElements;
-    }
-
-    async function handleSubmit(event: FormEvent<ContactForm>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
       setSending(true);
 
         event.preventDefault();
 
-        const formData = new FormData(event.target as ContactForm)
+    const formData = new FormData(event.currentTarget)
         try {
   
             const response = await fetch('/api/contact', {
