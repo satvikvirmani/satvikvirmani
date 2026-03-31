@@ -1,0 +1,121 @@
+---
+title: 'Commit Contract'
+subtitle: 'The extension I built because AI commits were getting a little too creative'
+publishedAt: '2026-03-31'
+summary: 'A VS Code extension that enforces Conventional Commits in GitHub Copilot by injecting structured instruction files with optional team-specific customization.'
+image: '/assets/projects/commit-contract/commit-contract.jpg'
+---
+
+Commit messages are supposed to be simple.
+
+A short summary of what changed. Maybe a type. Maybe a scope. Something clean, readable, and consistent. At least, that’s the idea.
+
+In reality, they range from “fix stuff” to full-length essays explaining a single variable rename. And once AI got involved, things didn’t get better—they just became more confidently inconsistent.
+
+GitHub Copilot would generate commit messages that looked correct, sounded professional, and still somehow ignored every convention the project was trying to follow.
+
+That was the breaking point.
+
+So instead of manually rewriting commits every time—or worse, pretending they were “good enough”—I built something that would make consistency unavoidable.
+
+---
+
+## What is it?
+
+Commit Contract is a VS Code extension that does one very specific thing: it tells GitHub Copilot exactly how to write your commit messages, and makes sure it listens.
+
+It enforces Conventional Commits by injecting a strict instruction file directly into your workspace. Every time Copilot generates a commit message, it now has a clear set of rules to follow—no guesswork, no interpretation, no creative liberties.
+
+And because every team eventually has opinions about formatting, it also allows you to layer custom instructions on top. You get structure without losing flexibility, which is about as close as you can get to ideal in a shared codebase.
+
+Underneath all of this is a simple idea: if AI is going to write your commits, it should at least follow the same rules humans are expected to.
+
+---
+
+## The flow
+
+### Setup — one command, permanent consequences
+
+The setup process is intentionally simple, because anything more complicated would defeat the purpose.
+
+You open the command palette, run a single command, and the extension takes over from there. It writes a `.copilot-commit-message-instructions.md` file into your workspace and updates your VS Code settings so Copilot knows exactly where to look.  [oai_citation:0‡README.md](sediment://file_00000000561071fd81cdf549300b30f5)
+
+There’s no ceremony, no configuration wizard, no “are you sure?” beyond a safe overwrite check. Just one action that quietly changes how commit messages are generated from that point forward.
+
+It’s fast, almost suspiciously so.
+
+---
+
+### Instructions — controlled creativity
+
+At the core of the extension is the instruction file.
+
+This is where the rules live—strict Conventional Commit guidelines that Copilot is expected to follow every time it generates a message. Types, structure, formatting—it’s all explicitly defined so there’s no room for interpretation.
+
+Because leaving things open-ended is exactly how you end up with commit messages like “Updated things and improved stuff.”
+
+On top of that, there’s support for custom instruction text. This is where teams can add their own preferences—Jira ticket prefixes, subject length limits, tone guidelines—without breaking the underlying convention.
+
+It’s a layered system: strict where it needs to be, flexible where it can afford to be.
+
+---
+
+### Status bar — subtle surveillance
+
+Once the setup is complete, the extension adds a status bar indicator.
+
+It doesn’t do much, and that’s the point. It sits there quietly, reflecting whether your workspace is configured or not. No interruptions, no popups—just a constant, passive reminder that your commit messages are now being held to a higher standard.
+
+You can ignore it. But it’s still there.
+
+---
+
+### Automation — because you will forget
+
+There’s also an optional auto-setup feature.
+
+Because no matter how simple a manual setup process is, someone will forget to run it. Or skip it. Or assume it’s already been done.
+
+So the extension can handle it automatically when a workspace is opened—once, silently, without requiring intervention.
+
+It’s less about convenience and more about eliminating the possibility of inconsistency before it starts.
+
+---
+
+### Logs — when things inevitably don’t work
+
+When something goes wrong—and eventually, something will—the extension logs everything to a dedicated output channel.
+
+Not because logging is exciting, but because debugging without visibility is worse.
+
+You can trace setup issues, verify behavior, and confirm whether the extension is doing what it’s supposed to. It’s not glamorous, but it’s necessary.
+
+---
+
+## The experience of building it
+
+This project started with a small annoyance and escalated into something more deliberate.
+
+At first, it was just about fixing my own workflow—making sure Copilot didn’t generate commit messages I had to rewrite. But once that worked, the problem shifted from “make it work” to “make it consistent across environments.”
+
+That meant dealing with VS Code APIs, workspace configurations, file system interactions, and edge cases like existing instruction files or multi-root workspaces. None of it was particularly complex in isolation, but together, it formed a system that had to behave predictably in situations that weren’t always predictable.
+
+The hardest part wasn’t writing the logic. It was designing the experience so that it felt invisible when it worked and obvious when it didn’t.
+
+Because if a tool like this draws attention to itself too often, it becomes part of the problem it’s trying to solve.
+
+---
+
+## What I learned
+
+This project reinforced a few things.
+
+First, AI tools are only as good as the constraints you give them. Left on their own, they optimize for plausibility, not correctness.
+
+Second, consistency doesn’t happen naturally in teams—it has to be enforced, either socially or technically. And technical enforcement tends to scale better.
+
+And third, the best tools don’t try to do everything. They solve one problem clearly and stay out of the way.
+
+Commit Contract doesn’t try to improve your commits. It just makes sure they follow the rules you already agreed on.
+
+Which, surprisingly, is enough.
